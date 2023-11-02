@@ -6,10 +6,13 @@
 # output: path_route_out_csv
 # csv output: scan_date;path_folder;path_folder/file_name;edit_date;access_date;file_size;row_count
 
+# format start command "./search_by_path.sh [path] "YYYY-MM-DD HH:mm:SS" out_file_name.csv
+# example start command "./search_by_path.sh . "2023-11-02 23:01:42" out.csv
+
 # get mb_size [0.xxxx]
 function get_file_size {
     local file="$1"
-    local size_in_b=$(ls -la $file | awk '{print $5}')
+    local size_in_b=$(ls -la "$file" | awk '{print $5}')
     local size_in_mb=$(echo "scale=4; $size_in_b/(1024*1024)" | bc | awk '{printf "%.4f\n", $0}')
     echo "$size_in_mb"
 }
